@@ -14,8 +14,6 @@ var timer = 1000;
 (function() {
     'use strict';
     check_feed();
-    window.onscroll = function(){timer=1000;}
-    // Your code here...
 })();
 
 
@@ -37,6 +35,5 @@ function check_feed(){
         }
         $(this).removeAttr('data-pagelet');
     });
-    timer = timer+500;
     setTimeout(check_feed,timer);
 }
