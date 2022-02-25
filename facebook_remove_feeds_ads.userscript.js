@@ -10,7 +10,6 @@
 // ==/UserScript==
 
 GM_addStyle(`.removeAD {background-color:white}`);
-
 var timer = 1000;
 (function() {
     'use strict';
@@ -19,19 +18,16 @@ var timer = 1000;
 
 
 function check_feed(){
-    //let num = $('div[data-pagelet="FeedUnit_{n}"]').size();
-    //console.log('check_feed',timer,num);
     $('div[data-pagelet^="FeedUnit"]').not('.removeAD').each(function(){
         if(/為你推薦/.test($(this).html()))
         {
-            push_num++;
-            console.log('remove 為你推薦',push_num);
+            console.log('remove 為你推薦');
             $(this).remove();
+
         }
         if($(this).find('a[aria-label="贊助"]').size() >= 1)
         {
-            ad_num++;
-            console.log('remove 贊助',ad_num);
+            console.log('remove 贊助');
             $(this).remove();
         }
         $(this).addClass('removeAD');
