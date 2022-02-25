@@ -6,10 +6,11 @@
 // @author       You
 // @require      http://code.jquery.com/jquery-1.12.4.min.js
 // @match        https://www.facebook.com/*
-// @grant        none
+// @grant        GM_addStyle
 // ==/UserScript==
-var push_num = 0;
-var ad_num = 0;
+
+GM_addStyle(`.removeAD {background-color:white}`);
+
 var timer = 1000;
 (function() {
     'use strict';
@@ -18,9 +19,9 @@ var timer = 1000;
 
 
 function check_feed(){
-    let num = $('div[data-pagelet="FeedUnit_{n}"]').size();
-    console.log('check_feed',timer,num);
-    $('div[data-pagelet^="FeedUnit"]').each(function(){
+    //let num = $('div[data-pagelet="FeedUnit_{n}"]').size();
+    //console.log('check_feed',timer,num);
+    $('div[data-pagelet^="FeedUnit"]').not('.removeAD').each(function(){
         if(/為你推薦/.test($(this).html()))
         {
             push_num++;
@@ -33,7 +34,7 @@ function check_feed(){
             console.log('remove 贊助',ad_num);
             $(this).remove();
         }
-        $(this).removeAttr('data-pagelet');
+        $(this).addClass('removeAD');
     });
     setTimeout(check_feed,timer);
 }
